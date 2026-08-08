@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bean Counter Café</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Source+Sans+3:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="header">
+        <p class="brand">Bean Counter Café</p>
+        <h1>Order at the counter</h1>
+        <p class="lede">Pick a drink, add it to your cart, and check out.</p>
+      </header>
+
+      <main class="layout">
+        <section class="menu" aria-labelledby="menu-heading">
+          <div class="section-head">
+            <h2 id="menu-heading">Menu</h2>
+            <label class="filter">
+              <span>Filter</span>
+              <select id="category-filter">
+                <option value="all">All drinks</option>
+                <option value="coffee">Coffee</option>
+                <option value="tea">Tea</option>
+                <option value="seasonal">Seasonal</option>
+              </select>
+            </label>
+          </div>
+          <ul id="menu-list" class="menu-list"></ul>
+        </section>
+
+        <aside class="cart" aria-labelledby="cart-heading">
+          <h2 id="cart-heading">Your cart</h2>
+          <ul id="cart-list" class="cart-list"></ul>
+          <p class="cart-empty" id="cart-empty">No items yet.</p>
+          <div class="totals">
+            <div class="totals-row">
+              <span>Subtotal</span>
+              <strong id="subtotal">$0.00</strong>
+            </div>
+            <div class="totals-row">
+              <span>Tax (8%)</span>
+              <strong id="tax">$0.00</strong>
+            </div>
+            <div class="totals-row total">
+              <span>Total</span>
+              <strong id="total">$0.00</strong>
+            </div>
+          </div>
+          <button type="button" id="checkout-btn" class="checkout" disabled>
+            Checkout
+          </button>
+          <p id="checkout-message" class="checkout-message" hidden></p>
+        </aside>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
