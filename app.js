@@ -42,8 +42,10 @@ const menuList = document.getElementById("menu-list");
 const cartList = document.getElementById("cart-list");
 const cartEmpty = document.getElementById("cart-empty");
 const categoryFilter = document.getElementById("category-filter");
+const tipSelect = document.getElementById("tip-select");
 const subtotalEl = document.getElementById("subtotal");
 const taxEl = document.getElementById("tax");
+const tipEl = document.getElementById("tip");
 const totalEl = document.getElementById("total");
 const checkoutBtn = document.getElementById("checkout-btn");
 const checkoutMessage = document.getElementById("checkout-message");
@@ -138,19 +140,23 @@ function renderCart() {
 
   const subtotal = calculateSubtotal();
   const numericSubtotal = Number(subtotal);
+  const tipRate = Number(tipSelect.value);
 
   if (Number.isNaN(numericSubtotal)) {
     subtotalEl.textContent = String(subtotal);
     taxEl.textContent = "—";
+    tipEl.textContent = "—";
     totalEl.textContent = "—";
     return;
   }
 
   const tax = numericSubtotal * TAX_RATE;
-  const total = numericSubtotal + tax;
+  const tipAmount = numericSubtotal * tipRate;
+  const total = numericSubtotal + tax + tipAmount;
 
   subtotalEl.textContent = formatMoney(numericSubtotal);
   taxEl.textContent = formatMoney(tax);
+  tipEl.textContent = formatMoney(tipAmount);
   totalEl.textContent = formatMoney(total);
 }
 
@@ -165,9 +171,13 @@ function checkout() {
     return;
   }
 
+  const tipRate = Number(tipSelect.value);
+  const tipAmount = subtotal * tipRate;
+  const total = subtotal + subtotal * TAX_RATE + tipAmount;
+
   checkoutMessage.hidden = false;
   checkoutMessage.textContent = `Order placed for ${formatMoney(
-    subtotal + subtotal * TAX_RATE
+    total
   )}. See you soon!`;
   cart.length = 0;
   renderCart();
@@ -186,6 +196,7 @@ cartList.addEventListener("click", (event) => {
 });
 
 categoryFilter.addEventListener("change", renderMenu);
+tipSelect.addEventListener("change", renderCart);
 checkoutBtn.addEventListener("click", checkout);
 
 renderMenu();
